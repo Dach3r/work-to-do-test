@@ -1,0 +1,32 @@
+require: rubocop
+
+AllCops:
+  Exclude:
+    - 'bin/**'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'spec/**/*'
+    - 'script/**'
+    - 'vendor/**/*'
+    - 'config/environments'
+    - 'Rakefile'
+    - 'config.ru'
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/channels/application_cable/channel.rb'
+    - 'app/channels/application_cable/connection.rb'
+Metrics/AbcSize:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: true
+Metrics/MethodLength:
+  Max: 14
+Metrics/BlockNesting:
+  Max: 3
+Metrics/ClassLength:
+  Max: 100
+  CountComments: false
+Metrics/ParameterLists:
+  Max: 5
+Documentation:
+  Enabled: false
