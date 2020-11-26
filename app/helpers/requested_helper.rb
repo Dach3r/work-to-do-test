@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module DataRequested
+module RequestedHelper
   def graph_rest(resource, options = {}); end
 end

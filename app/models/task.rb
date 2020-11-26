@@ -5,8 +5,8 @@ class Task < ApplicationRecord
   belongs_to :user
 
   validates_presence_of :name, :description, :position
-  validates :priority, inclusion: { in: %w[high medium low] }
-  validates :status, inclusion: { in: %w[created pending published deleted] }
+  validates :priority, inclusion: { in: ConstantHelper::PRIORITY_LIST }
+  validates :status, inclusion: { in: ConstantHelper::STATUS_LIST }
 
   scope :pending_board, -> { where(status: :pending) }
 end
