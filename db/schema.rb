@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_185422) do
+ActiveRecord::Schema.define(version: 2020_11_26_025906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,30 @@ ActiveRecord::Schema.define(version: 2020_11_25_185422) do
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.date "due_date", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "priority", null: false
+    t.string "status", default: "created"
+    t.text "description", null: false
+    t.integer "position", default: 999
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,4 +66,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_185422) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "projects"
+  add_foreign_key "tasks", "users"
 end

@@ -23,7 +23,6 @@ module V1
         resource.unlock_access! if unlockable?(resource)
         resource.after_database_authentication
         default_success(I18n.t('devise.passwords.updated_not_active'))
-
       rescue StandardError => e
         default_error(e)
       end
