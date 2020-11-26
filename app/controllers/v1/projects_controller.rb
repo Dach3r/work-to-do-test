@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+
+module V1
+  class ProjectsController < ApplicationController
+    before_action :set_project, only: %w[show update pending]
+
+    def create
+      project = current_user.projects.create!(project_params)
+      render json: project
+    rescue StandardError => e
+      default_error(e)
+    end
+
+    def show
+      render json: @project
+    rescue StandardError => e
+      default_error(e)
+    end
+
+    def pending
+      tasks = @project.tasks.pending_board
+      render json: tasks
+    rescue StandardError => e
+      default_error(e)
+    end
+
+    def update
+      @project.update!(project_params)
+      render json: @project
+    rescue StandardError => e
+      default_error(e)
+    end
+
+    private
+
+    def set_project
+      @project = Project.find(params[:id])
+    end
+
+    def project_params
+      params.permit(:name, :description, :due_date)
+    end
+  end
+end
