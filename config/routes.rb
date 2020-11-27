@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   }
 
   namespace :v1 do
+    resources :categories, only: %w[index create]
     resources :projects, only: %w[create update show] do
       get :pending, on: :member
 

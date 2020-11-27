@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_025906) do
+ActiveRecord::Schema.define(version: 2020_11_26_164034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "categorization_type"
+    t.bigint "categorization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["categorization_type", "categorization_id"], name: "index_categories_on_categorization_type_and_categorization_id"
+  end
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false

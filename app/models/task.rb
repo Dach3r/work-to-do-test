@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
-  belongs_to :project
   belongs_to :user
+  belongs_to :project
+
+  has_many :categories, as: :categorization
 
   validates_presence_of :name, :description, :position
   validates :priority, inclusion: { in: ConstantHelper::PRIORITY_LIST }
