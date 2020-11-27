@@ -3,9 +3,10 @@
 module V1
   class ProjectsController < ApplicationController
     before_action :set_project, only: %w[show update pending]
+    before_action :authenticate_user!
 
     def create
-      project = current_user.projects.create!(project_params)
+      project = @user.projects.create!(project_params)
       render json: project
     rescue StandardError => e
       default_error(e)

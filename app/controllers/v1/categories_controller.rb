@@ -2,6 +2,8 @@
 
 module V1
   class CategoriesController < ApplicationController
+    before_action :authenticate_user!, only: %w[create]
+
     def index
       categories = Category.apply_filter(params[:type])
       render json: categories
