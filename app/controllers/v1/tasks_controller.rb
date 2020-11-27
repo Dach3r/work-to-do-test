@@ -12,7 +12,7 @@ module V1
       if @user.present?
         render json: tasks
       else
-        render json: tasks, serializer: Tasks::TaskPublicSerializer
+        render json: tasks, each_serializer: Tasks::TaskPublicSerializer
       end
     rescue StandardError => e
       default_error(e)

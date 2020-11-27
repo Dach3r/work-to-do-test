@@ -3,7 +3,7 @@
 module ApiHelper
   include RenderHelper
 
-  def get_current_user
+  def user_session
     @user = nil
     @user = current_user if @user.nil? && user_signed_in?
   rescue StandardError => e

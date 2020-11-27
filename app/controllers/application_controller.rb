@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :get_current_user
+  before_action :user_session
 
   include ApiHelper
   include RenderHelper
