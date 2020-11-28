@@ -4,12 +4,16 @@ en:
       project:
         one: Project
         other: Projects
+        unauthorized: You do not have permissions to view or manage this project
+        not_permit_owner: You do not need to add yourself to your project
+        success_invitation: "%{email} has been successfully add"
       task:
         one: Task
         other: Tasks
       user:
         one: User
         other: Users
+        not_found: The user you are looking for does not exist
     attributes:
       project:
         name: Name

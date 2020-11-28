@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :projects
   has_many :tasks
   has_many :categories, as: :categorization
+  has_many :project_users
 
   validates_presence_of :name, :last_name, :cellphone, :birthdate
 end

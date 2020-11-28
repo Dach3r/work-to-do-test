@@ -19,7 +19,7 @@ module V1
     end
 
     def show
-      if @user.present? && @user.id == @task.user.id
+      if @user&.id == @task.user.id
         render json: @task
       else
         render json: @task, serializer: Tasks::TaskPublicSerializer
