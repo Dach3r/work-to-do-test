@@ -33,7 +33,7 @@ module V1
     end
 
     def users
-      projects = @project.user
+      projects = @project.users
       render json: projects
     rescue StandardError => e
       default_error(e)
