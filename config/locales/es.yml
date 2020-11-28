@@ -4,12 +4,16 @@ es:
       project:
         one: Proyecto
         other: Proyectos
+        unauthorized: No tienes permisos para visualizar o gestionar este proyecto
+        not_permit_owner: No es necesario de que te auto agregues a tu proyecto
+        success_invitation: "Se a agregado correctamente a %{email}"
       task:
         one: Tarea
         other: Tareas
       user:
         one: Usuario
         other: Usuarios
+        not_found: El usuario que estas buscando no existe
     attributes:
       project:
         name: Nombre

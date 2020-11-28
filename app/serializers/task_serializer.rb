@@ -5,4 +5,5 @@ class TaskSerializer < ApplicationSerializer
 
   belongs_to :project
   belongs_to :user
+  has_many :subtasks, serializer: Tasks::SubtaskSerializer
 end

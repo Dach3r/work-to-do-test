@@ -10,9 +10,15 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :categories, only: %w[index create]
     resources :projects, only: %w[create update show] do
-      get :pending, on: :member
+      member do
+        get :pending
+        get :users
+
+        post :invite
+      end
 
       resources :tasks, only: %w[index show create update] do
+        resources :subtasks, only: :create
         put :update_status, on: :member
       end
     end
