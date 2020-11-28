@@ -2,6 +2,6 @@
 
 module Tasks
   class SubtaskSerializer < ApplicationSerializer
-    attributes :id, :name, :priority
+    attributes :name, :priority
   end
 end
