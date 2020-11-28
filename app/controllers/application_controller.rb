@@ -6,7 +6,6 @@ class ApplicationController < ActionController::API
 
   include ApiHelper
   include RenderHelper
-  include RequestedHelper
 
   protected
 
