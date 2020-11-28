@@ -1,24 +1,20 @@
-# README
+Work To Do (Test)
+-
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Stack:
+- Ruby on Rails (6.0.3)
+- Ruby (2.7.2)
+- Rspec (4.0.1)
 
-Things you may want to cover:
+This system has an authentication system with JWT,
+For more details you can see the documentation at the end
 
-* Ruby version
+Start to work:
+- First step, clone the project `git clone git@github.com:Dach3r/work-to-do-test.git`
+- Please create your db config `config/database.yml`
+- Run `rails db:create && rails db:migrate && rails db:seed`
+- And now only run `rails s`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Documentation: https://documenter.getpostman.com/view/5285679/TVmJgy3v
+ 
+Developer: (David Noreña / [dnorena415@gmail.com](mailto:dnorena415@gmail.com))
