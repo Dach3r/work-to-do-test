@@ -7,7 +7,10 @@ module V1
 
       def create
         user = User.find_by_email(params[:user][:email])
-        raise I18n.t('devise.failure.not_found_in_database') if user.blank?
+        if user.blank?
+          raise I18n.t('devise.failure.not_found_in_database',
+                       authentication_keys: I18n.t('activerecord.attributes.user.email'))
+        end
 
         default_success(I18n.t('devise.passwords.send_instructions')) if user.send_reset_password_instructions
       rescue StandardError => e
