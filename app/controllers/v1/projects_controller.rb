@@ -33,8 +33,7 @@ module V1
     end
 
     def users
-      projects = @project.users
-      render json: projects
+      render json: team_format(@project)
     rescue StandardError => e
       default_error(e)
     end
@@ -54,6 +53,13 @@ module V1
     end
 
     private
+
+    def team_format(project)
+      {
+        owner: UserSerializer.new(project.user),
+        team: ActiveModelSerializers::SerializableResource.new(project.users)
+      }
+    end
 
     def set_project
       @project = Project.find(params[:id])
