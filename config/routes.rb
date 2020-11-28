@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         get :pending
         get :users
 
-        post :invite
+        post :add_user
       end
 
       resources :tasks, only: %w[index show create update] do

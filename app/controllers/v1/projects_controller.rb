@@ -2,7 +2,7 @@
 
 module V1
   class ProjectsController < ApplicationController
-    before_action :set_project, only: %w[show update pending users invite]
+    before_action :set_project, only: %w[show update pending users add_user]
     before_action :authenticate_user!
 
     def create
@@ -39,8 +39,8 @@ module V1
       default_error(e)
     end
 
-    def invite
-      raise I18n.t('activerecord.models.project.unauthorized') if @user.id != @project.user.id
+    def add_user
+      raise I18n.t('activerecord.models.project.unauthorized') if @user&.id != @project.user.id
       raise I18n.t('activerecord.models.user.not_found') if params[:email].blank?
 
       user = User.find_by(email: params[:email])
