@@ -45,8 +45,7 @@ module V1
 
     def update_status
       status = params[:status]
-      @task.update!(status: status)
-      render json: @task
+      render json: @task if @task.update!(status: status)
     rescue StandardError => e
       default_error(e)
     end
