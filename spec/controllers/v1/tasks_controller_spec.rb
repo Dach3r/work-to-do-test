@@ -4,15 +4,15 @@ RSpec.describe V1::TasksController, type: :controller do
   describe 'GET /v1/projects/:id/tasks - All tasks' do
     it 'should return all tasks available if user dont have asession' do
       task = create(:task)
-      get :index, params: { project_id: task.project.id }
 
+      get :index, params: { project_id: task.project.id }
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(JSON.parse(response.body).first['name']).not_to be_empty
+      expect(response).to have_http_status(:ok)
     end
 
     it 'should return all tasks available if user have a session' do
       task = create(:task)
-      auth_sign_in(task.user)
+      sign_in(task.user)
 
       get :index, params: { project_id: task.project.id }
 
@@ -22,20 +22,9 @@ RSpec.describe V1::TasksController, type: :controller do
   end
 
   describe 'GET /v1/projects/:id/tasks/:id - Return specific task' do
-    it 'should return a tasks' do
-      task = create(:task)
-      get :show, params: {
-        id: task.id,
-        project_id: task.project.id
-      }
-
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(JSON.parse(response.body)['name']).not_to be_empty
-    end
-
     it 'should return data if user is owner' do
       task = create(:task)
-      auth_sign_in(task.user)
+      sign_in(task.user)
 
       get :show, params: {
         id: task.id,
@@ -61,7 +50,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should can create a task' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       post :create, params: {
         user_id: project.user.id,
@@ -77,7 +66,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should return error if priority no exist' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       post :create, params: {
         user_id: project.user.id,
@@ -92,7 +81,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should return error if have params empty' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       post :create, params: {
         user_id: project.user.id,
@@ -110,7 +99,7 @@ RSpec.describe V1::TasksController, type: :controller do
   describe 'PUT /v1/projects/:project_id/tasks/:id - Update task' do
     it 'should can update a task' do
       task = create(:task)
-      auth_sign_in(task.user)
+      sign_in(task.user)
 
       put :update, params: {
         id: task.id,
@@ -125,7 +114,7 @@ RSpec.describe V1::TasksController, type: :controller do
   describe 'PUT /v1/projects/:project_id/tasks/:task_id/update_status - Update status task' do
     it 'should can update a task' do
       task = create(:task)
-      auth_sign_in(task.user)
+      sign_in(task.user)
 
       put :update_status, params: {
         id: task.id,

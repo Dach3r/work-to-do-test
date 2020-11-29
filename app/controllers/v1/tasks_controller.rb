@@ -30,7 +30,7 @@ module V1
 
     def create
       task = @user.tasks.new(task_params)
-      task.project_id = @project.id
+      task.project_id = params[:project_id]
       render json: task if task.save!
     rescue StandardError => e
       default_error(e)

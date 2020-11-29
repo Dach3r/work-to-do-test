@@ -5,6 +5,7 @@ RSpec.describe Task, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:project) }
     it { should have_many(:categories) }
+    it { should have_many(:subtasks).with_foreign_key('task_id') }
   end
 
   describe 'validations' do

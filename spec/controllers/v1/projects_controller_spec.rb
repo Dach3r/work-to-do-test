@@ -4,7 +4,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
   describe 'POST /v1/projects - Create project' do
     it 'should can create a new project' do
       user = create(:user)
-      auth_sign_in(user)
+      sign_in(user)
 
       post :create, params: {
         name: Faker::Name.name,
@@ -21,7 +21,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
   describe 'GET /v1/projects/:id - Return specific project' do
     it 'should return success project' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       get :show, params: { id: project.id }
 
@@ -33,7 +33,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
   describe 'GET /v1/projects/:project_id/pending - Get tasks pending' do
     it 'should get all tasks with status pending' do
       task = create(:task, status: :pending)
-      auth_sign_in(task.user)
+      sign_in(task.user)
 
       get :pending, params: { id: task.project.id }
 
@@ -45,7 +45,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
   describe 'GET /v1/projects/:id/users - Get all users associate to project' do
     it 'should get all users of project' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       get :users, params: { id: project.id }
 
@@ -57,7 +57,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
   describe 'PUT /v1/projects/:id - Update project' do
     it 'should can update a project' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       put :update, params: { id: project.id }
 
@@ -69,7 +69,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
   describe 'POST /v1/projects/:id/add_user - Add new user to project' do
     it 'should return error if user not found' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       post :add_user, params: { id: project.id }
 
@@ -79,7 +79,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
 
     it 'should return error if user owner of project' do
       project = create(:project)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       post :add_user, params: {
         id: project.id,
@@ -93,7 +93,7 @@ RSpec.describe V1::ProjectsController, type: :controller do
     it 'should return error if user owner of project' do
       project = create(:project)
       user = create(:user)
-      auth_sign_in(project.user)
+      sign_in(project.user)
 
       post :add_user, params: {
         id: project.id,

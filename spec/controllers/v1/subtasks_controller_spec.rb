@@ -4,7 +4,7 @@ RSpec.describe V1::SubtasksController, type: :controller do
   describe 'POST /v1/projects/:project_id/tasks/:task_id/subtasks - Create new subtask' do
     it 'should can create new subtask' do
       task = create(:task)
-      auth_sign_in(task.user)
+      sign_in(task.user)
 
       post :create, params: {
         project_id: task.project.id,
