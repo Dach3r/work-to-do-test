@@ -3,13 +3,13 @@
 module V1
   class TasksController < ApplicationController
     before_action :set_task, only: %w[show update update_status]
+    before_action :set_project, only: %w[index show]
     before_action :authenticate_user!, only: %w[create update update_status]
 
     def index
-      project = Project.find(params[:project_id])
-      tasks = project.tasks
+      tasks = @project.tasks
 
-      if @user.present?
+      if @project.project_users.find_by(user_id: @user.id).present? || @user.id == @project.user.id
         render json: tasks
       else
         render json: tasks, each_serializer: Tasks::TaskPublicSerializer
@@ -19,7 +19,7 @@ module V1
     end
 
     def show
-      if @user&.id == @task.user.id
+      if @project.project_users.find_by(user_id: @user.id).present? || @user.id == @project.user.id
         render json: @task
       else
         render json: @task, serializer: Tasks::TaskPublicSerializer
@@ -30,7 +30,7 @@ module V1
 
     def create
       task = @user.tasks.new(task_params)
-      task.project_id = params[:project_id]
+      task.project_id = @project.id
       render json: task if task.save!
     rescue StandardError => e
       default_error(e)
@@ -54,6 +54,10 @@ module V1
 
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def set_project
+      @project = Project.find(params[:project_id])
     end
 
     def task_params

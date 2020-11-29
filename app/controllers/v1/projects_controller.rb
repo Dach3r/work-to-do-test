@@ -13,6 +13,10 @@ module V1
     end
 
     def show
+      unless @project.project_users.find_by(user_id: @user.id).present? || @user.id == @project.user.id
+        raise I18n.t('activerecord.models.project.unauthorized')
+      end
+
       render json: @project
     rescue StandardError => e
       default_error(e)

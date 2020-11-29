@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  scope "(:locale)", locale: /en|es/ do
-    devise_for :users, defaults: { format: :json }, controllers: {
-      sessions: 'v1/auth/sessions',
-      registrations: 'v1/auth/registrations',
-      passwords: 'v1/auth/passwords'
-    }
+  devise_for :users, defaults: { format: :json }, controllers: {
+    sessions: 'v1/auth/sessions',
+    registrations: 'v1/auth/registrations',
+    passwords: 'v1/auth/passwords'
+  }
 
+  scope "(:locale)", locale: /en|es/ do
     namespace :v1 do
       resources :categories, only: %w[index create]
       resources :projects, only: %w[create update show] do

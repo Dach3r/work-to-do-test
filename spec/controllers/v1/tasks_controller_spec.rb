@@ -12,7 +12,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should return all tasks available if user have a session' do
       task = create(:task)
-      sign_in(task.user)
+      auth_sign_in(task.user)
 
       get :index, params: { project_id: task.project.id }
 
@@ -35,7 +35,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should return data if user is owner' do
       task = create(:task)
-      sign_in(task.user)
+      auth_sign_in(task.user)
 
       get :show, params: {
         id: task.id,
@@ -61,7 +61,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should can create a task' do
       project = create(:project)
-      sign_in(project.user)
+      auth_sign_in(project.user)
 
       post :create, params: {
         user_id: project.user.id,
@@ -77,7 +77,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should return error if priority no exist' do
       project = create(:project)
-      sign_in(project.user)
+      auth_sign_in(project.user)
 
       post :create, params: {
         user_id: project.user.id,
@@ -92,7 +92,7 @@ RSpec.describe V1::TasksController, type: :controller do
 
     it 'should return error if have params empty' do
       project = create(:project)
-      sign_in(project.user)
+      auth_sign_in(project.user)
 
       post :create, params: {
         user_id: project.user.id,
@@ -110,7 +110,7 @@ RSpec.describe V1::TasksController, type: :controller do
   describe 'PUT /v1/projects/:project_id/tasks/:id - Update task' do
     it 'should can update a task' do
       task = create(:task)
-      sign_in(task.user)
+      auth_sign_in(task.user)
 
       put :update, params: {
         id: task.id,
@@ -125,7 +125,7 @@ RSpec.describe V1::TasksController, type: :controller do
   describe 'PUT /v1/projects/:project_id/tasks/:task_id/update_status - Update status task' do
     it 'should can update a task' do
       task = create(:task)
-      sign_in(task.user)
+      auth_sign_in(task.user)
 
       put :update_status, params: {
         id: task.id,
