@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SerializerHelper
   def response_json_data(resource, params = {})
     if params.nil?
