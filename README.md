@@ -25,6 +25,7 @@ Stack:
 - Ruby (2.7.2)
 - Rspec
 - Rubocop
+- Docker
 ---
 - This system has an authentication system with JWT
 - The seed file contain all initial data for working
@@ -56,6 +57,18 @@ Start to work:
     rails s
 ```
 
+Start project with docker:
+```
+    docker-compose up
+```
+
+You need add this line on db if use MacOS
+```
+    host: host.docker.internal
+```
+
+And need to config your .env file with your data
+
 Rspec:
 
 ![Rspec Test](https://i.imgur.com/chF8ks7.png)
@@ -63,6 +76,14 @@ Rspec:
 Rubocop:
 
 ![Rubocop Test](https://i.imgur.com/hkAQb7B.png)
+
+Docker:
+
+![Docker](https://i.imgur.com/7XthRNT.png)
+
+Config DB:
+
+![DB](https://i.imgur.com/rZlQe2C.png)
 
 Documentation: https://documenter.getpostman.com/view/5285679/TVmJgy3v
 
