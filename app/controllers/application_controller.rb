@@ -7,7 +7,6 @@ class ApplicationController < ActionController::API
 
   include ApiHelper
   include RenderHelper
-  include SerializerHelper
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
