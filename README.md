@@ -20,12 +20,19 @@ Use PostgreSQL as database
 7. All error messages should be also translated using model locale config files
 8. The work must include all test based on RSpec
 ---
+
+IMPORTANT: If you working with localhost need set host: localhost 
+
+If you working with docker need set host: host.docker.internal
+
+---
 Stack:
 - Ruby on Rails (6.0.3)
 - Ruby (2.7.2)
 - Rspec
 - Rubocop
 - Docker
+
 ---
 - This system has an authentication system with JWT
 - The seed file contain all initial data for working
@@ -66,8 +73,6 @@ You need add this line on db if use MacOS
 ```
     host: host.docker.internal
 ```
-
-And need to config your .env file with your data
 
 Rspec:
 
